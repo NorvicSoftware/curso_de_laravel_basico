@@ -51,7 +51,7 @@ class PublicacionController extends Controller
     /**
      * Display the specified resource for.
      */
-    public function showPublicaciones(string $alumno_id, string $id)
+    public function showPublicaciones(string $alumno_id)
     {
         $publicaciones = $this->publicaciones->obtenerPublicacionesPorAlumno($alumno_id);
         return view('publicaciones.verPublicaciones', ['publicaciones' => $publicaciones]);
