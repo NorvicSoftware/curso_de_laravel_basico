@@ -25,9 +25,9 @@ class AlumnoRepository {
         ]);
     }
 
-    public function actualizarAlumno($id, $alumnoActualizar)
+    public function actualizarAlumno($alumnoActualizar, $id)
     {
-        $alumno = Alumno::find($id);
+        $alumno = Alumno::findOrFail($id);
         $alumno->apellido = $alumnoActualizar->apellido;
         $alumno->edad = $alumnoActualizar->edad;
         $alumno->save();
@@ -35,7 +35,7 @@ class AlumnoRepository {
 
     public function eliminarAlumno($id)
     {
-        $alumno = Alumno::find($id);
+        $alumno = Alumno::findOrFail($id);
         $alumno->delete();
     }
 

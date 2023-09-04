@@ -24,17 +24,19 @@ class PublicacionRepository {
     {
         Publicacion::create([
             'titulo' => $publicacion->titulo,
-            'publicacion' => getdate($publicacion->publicacion),
+            'publicacion' => $this->getdate($publicacion->publicacion),
             'genero' => $publicacion->genero,
             'alumno_id' => $publicacion->alumno_id,
         ]);
     }
 
-    public function actualizarPublicacion($id, $publicacionActualizar)
+    public function actualizarPublicacion($publicacionActualizar, $id)
     {
         $publicacion = Publicacion::find($id);
         $publicacion->titulo = $publicacionActualizar->titulo;
+        $publicacion->publicacion = $this->getdate($publicacionActualizar->publicacion);
         $publicacion->genero = $publicacionActualizar->genero;
+        $publicacion->alumno_id = $publicacionActualizar->alumno_id;
         $publicacion->save();
     }
 

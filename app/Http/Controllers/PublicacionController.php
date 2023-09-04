@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repositories\PublicacionRepository;
+use App\Repositories\AlumnoRepository;
 
 class PublicacionController extends Controller
 {
     protected $publicaciones;
+    protected $alumnos;
 
-    public function __construct(PublicacionRepository $publicaciones)
+    public function __construct(PublicacionRepository $publicaciones, AlumnoRepository $alumnos)
     {
         $this->publicaciones = $publicaciones;
+        $this->alumnos = $alumnos;
     }
     /**
      * Display a listing of the resource.
@@ -27,7 +30,8 @@ class PublicacionController extends Controller
      */
     public function create()
     {
-        return view('publicaciones.crear');
+        $alumnos = $this->alumnos->obtenerAlumnos();
+        return view('publicaciones.crear', ['alumnos' => $alumnos]);
     }
 
     /**
@@ -53,8 +57,9 @@ class PublicacionController extends Controller
      */
     public function showPublicaciones(string $alumno_id)
     {
+        $alumno = $this->alumnos->obtenerAlumnoPorId($alumno_id);
         $publicaciones = $this->publicaciones->obtenerPublicacionesPorAlumno($alumno_id);
-        return view('publicaciones.verPublicaciones', ['publicaciones' => $publicaciones]);
+        return view('publicaciones.verPublicaciones', ['alumno'=> $alumno, 'publicaciones' => $publicaciones]);
     }
 
     /**
@@ -62,8 +67,9 @@ class PublicacionController extends Controller
      */
     public function edit(string $id)
     {
+        $alumnos = $this->alumnos->obtenerAlumnos();
         $publicacion = $this->publicaciones->obtenerPublicacionPorId($id);
-        return view('publicaciones.editar', ['publicacion' => $publicacion]);
+        return view('publicaciones.editar', ['alumnos' => $alumnos, 'publicacion' => $publicacion]);
     }
 
     /**

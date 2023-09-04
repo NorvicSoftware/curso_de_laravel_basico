@@ -26,16 +26,16 @@ Route::controller(AlumnoController::class)->group(function (){
     Route::post('/alumnos/crear',  'store');
     Route::get('/alumnos/editar/{id}', 'edit');
     Route::put('/alumnos/editar/{id}', 'update');
-    Route::delete('/alumnos/eliminar/{id}',  'destroy');
+    Route::get('/alumnos/eliminar/{id}',  'destroy');
 });
 
 Route::controller(PublicacionController::class)->group(function (){
     Route::get('/publicaciones', 'index');
-    Route::get('/publicacioness/ver/{id}', 'show');
-    Route::get('/publicacioness/ver/alumno/{id}', 'showPublicaciones');
+    Route::get('/publicaciones/ver/{id}', 'show');
+    Route::get('/publicaciones/ver/alumno/{id}', 'showPublicaciones');
     Route::get('/publicaciones/crear', 'create');
     Route::post('/publicaciones/crear',  'store');
     Route::get('/publicaciones/editar/{id}', 'edit');
     Route::put('/publicaciones/editar/{id}', 'update');
-    Route::delete('/publicaciones/eliminar/{id}',  'destroy');
+    Route::get('/publicaciones/eliminar/{id}',  'destroy');
 });
