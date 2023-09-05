@@ -39,6 +39,12 @@ class PublicacionController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'titulo' => 'required|min:3|max:200',
+            'publicacion' => 'required|date_format:"d/m/Y"',
+            'genero' => 'required',
+            'alumno_id' => 'required|integer|exists:alumnos,id',
+        ]);
         $this->publicaciones->insertarPublicacion($request);
         return redirect()->action([PublicacionController::class, 'index']);
     }
@@ -77,6 +83,12 @@ class PublicacionController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $validated = $request->validate([
+            'titulo' => 'required|min:3|max:200',
+            'publicacion' => 'required|date_format:"d/m/Y"',
+            'genero' => 'required',
+            'alumno_id' => 'required|integer|exists:alumnos,id',
+        ]);
         $this->publicaciones->actualizarPublicacion($request, $id);
         return redirect()->action([PublicacionController::class, 'index']);
     }

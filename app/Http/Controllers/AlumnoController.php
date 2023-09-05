@@ -36,6 +36,12 @@ class AlumnoController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'nombre' => 'required|min:3|max:25',
+            'apellido' => 'required|min:3|max:25',
+            'edad' => 'required|integer',
+            'direccion' => 'required',
+        ]);
         $this->alumnos->insertarAlumno($request);
         return redirect()->action([AlumnoController::class, 'index']);
     }
@@ -63,6 +69,12 @@ class AlumnoController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $validated = $request->validate([
+            'nombre' => 'required|min:3|max:25',
+            'apellido' => 'required|min:3|max:25',
+            'edad' => 'required|integer',
+            'direccion' => 'required',
+        ]);
         $this->alumnos->actualizarAlumno($request, $id);
         return redirect()->action([AlumnoController::class, 'index']);
     }

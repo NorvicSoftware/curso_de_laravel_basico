@@ -22,6 +22,9 @@
         </select>
         <input type="submit" value="Guardar">
     </form>
+    @foreach ($errors->all() as $error)
+        <p style="color:red">{{ $error }}</p>
+    @endforeach
     </body>
 </html>
 
